@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Search Results</title>
+    <style>
+        /* Reset default margin and padding */
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Background styling */
+        body {
+            background-color: #f0f0f0; /* Light gray background */
+            background-image: url('{{ url_for('static', filename='bg.jpg') }}'); /* Replace with your background image */
+            background-size: cover; /* Cover the entire viewport */
+            background-position: center;
+            background-attachment: fixed; /* Fixed background */
+        }
+
+        /* Container for the entire content */
+        .container {
+            max-width: 800px; /* Limit content width */
+            margin: 20px auto; /* Center content horizontally with some margin */
+            background-color: #ffffff; /* White background */
+            border-radius: 8px; /* Rounded corners */
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+            padding: 20px; /* Padding inside the container */
+        }
+
+        /* Header styling */
+        .header {
+            text-align: center;
+            margin-top: 30px; /* Top margin */
+            font-size: 32px;
+            color: #333333;
+            font-weight: bold;
+        }
+
+        /* Results section styling */
+        .results {
+            margin-top: 20px; /* Top margin */
+            text-align: center;
+        }
+
+        /* Table styling */
+        table {
+            width: 100%; /* Full width */
+            margin-top: 20px; /* Top margin */
+            border-collapse: collapse; /* Collapse borders between table cells */
+        }
+
+        /* Table header styling */
+        table th {
+            background-color: #f2f2f2; /* Light gray background */
+            color: #333333; /* Dark gray text color */
+            font-weight: bold; /* Bold font for headers */
+            padding: 12px; /* Padding inside cells */
+            border: 1px solid #dddddd; /* Gray border */
+        }
+
+        /* Table cell styling */
+        table td {
+            padding: 12px; /* Padding inside cells */
+            border: 1px solid #dddddd; /* Gray border */
+        }
+
+        /* Link styling */
+        table td a {
+            color: #007bff; /* Blue link color */
+            text-decoration: none; /* Remove underline */
+            font-weight: bold; /* Bold font */
+        }
+
+        /* Return link styling */
+        .return-link-container {
+            text-align: center; /* Center align */
+            margin-top: 20px; /* Top margin */
+            margin-bottom: 30px; /* Bottom margin */
+        }
+
+        .return-link-container a {
+            color: #007bff; /* Blue link color */
+            text-decoration: none; /* Remove underline */
+            font-weight: bold; /* Bold font */
+            border: 1px solid #007bff; /* Blue border */
+            padding: 10px 20px; /* Padding inside link */
+            border-radius: 4px; /* Rounded corners */
+            transition: background-color 0.3s ease; /* Smooth transition */
+        }
+
+        .return-link-container a:hover {
+            background-color: #007bff; /* Darken background on hover */
+            color: #ffffff; /* White text on hover */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">SEARCH RESULTS</div>
+
+        {% if data %}
+        <div class="results">
+            <p><strong>Selected Image:</strong> {{ image }}</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Source</th>
+                        <th>Link</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in data %}
+                    <tr>
+                        <td>{{ item.source }}</td>
+                        <td><a href="{{ item.link }}" target="_blank">View</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% endif %}
+
+        <!-- Return link to homepage -->
+        <div class="return-link-container">
+            <a href="{{ url_for('index') }}">Return to Homepage</a>
+        </div>
+    </div>
+</body>
+</html>
